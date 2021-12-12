@@ -20,10 +20,22 @@ class ExploreScreen extends StatelessWidget {
       future: mockeService.getExploreData(),
       // 3
       builder: (context, AsyncSnapshot<ExploreData> snapshot) {
-        // 6
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
+        // ignore: todo
+        // TODO: Add Nested List Views
+        // 4
+        if (snapshot.connectionState == ConnectionState.done) {
+          final recipes = snapshot.data?.todayRecipes ?? [];
+          return Center(
+            child: Container(
+              child: const Text('Show TodayRecipeListView'),
+            ),
+          );
+        } else {
+          // 6
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
       },
     );
   }
