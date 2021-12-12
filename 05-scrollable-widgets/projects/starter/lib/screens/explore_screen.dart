@@ -14,8 +14,17 @@ class ExploreScreen extends StatelessWidget {
     // 2
     // ignore: todo
     // TODO 1: Add TodayRecipeListView FutureBuilder
-    return const Center(
-      child: Text('Explore Screen'),
+    // 1
+    return FutureBuilder(
+      // 2
+      future: mockeService.getExploreData(),
+      // 3
+      builder: (context, AsyncSnapshot<ExploreData> snapshot) {
+        // 6
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }
