@@ -25,6 +25,8 @@ class ExploreScreen extends StatelessWidget {
         // 4
         if (snapshot.connectionState == ConnectionState.done) {
           final recipes = snapshot.data?.todayRecipes ?? [];
+          // ignore: todo
+          // TODO: Replace this with TodayRecipeListView
           return Center(
             child: Container(
               child: const Text('Show TodayRecipeListView'),
