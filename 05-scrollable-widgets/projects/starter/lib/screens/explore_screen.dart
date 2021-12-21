@@ -37,10 +37,7 @@ class ExploreScreen extends StatelessWidget {
               // 9
               // ignore: todo
               // TODO: Replace this with FriendPostListView
-              Container(
-                height: 400,
-                color: Colors.green,
-              ),
+              FriendPostListView(friendPosts: snapshot.data?.friendPosts ?? [])
             ],
           );
         } else {

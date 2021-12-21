@@ -4,7 +4,7 @@ import '../models/models.dart';
 import 'components.dart';
 
 class FriendPostListView extends StatelessWidget {
-  // 1
+  // 1.1
   final List<Post> friendPosts;
   const FriendPostListView({
     Key? key,
@@ -15,9 +15,14 @@ class FriendPostListView extends StatelessWidget {
   Widget build(BuildContext context) {
     // 2
     return Padding(
-      padding: const EdgeInsets.only(right: 16, left: 16, top: 0),
+      padding: const EdgeInsets.only(
+        left: 16,
+        right: 16,
+        top: 0,
+      ),
       // 3
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // 4
           Text('Social Chefs 👩‍🍳',
@@ -26,7 +31,29 @@ class FriendPostListView extends StatelessWidget {
           const SizedBox(height: 16),
           // ignore: todo
           // TODO: Add PostListView here
-          // 6
+          // 2.1
+          ListView.separated(
+            // 2.2
+            primary: false,
+            // 2.3
+            physics: const NeverScrollableScrollPhysics(),
+            // 2.4
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            itemCount: friendPosts.length,
+            itemBuilder: (context, index) {
+              // 2.5
+              final post = friendPosts[index];
+              return FriendPostTile(post: post);
+            },
+            separatorBuilder: (context, index) {
+              // 6
+              return const SizedBox(
+                height: 16,
+              );
+            },
+          ),
+          // 1.6
           const SizedBox(height: 16),
         ],
       ),
