@@ -103,7 +103,7 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
       ),
       // 5
       body: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
             // ignore: todo
@@ -111,12 +111,17 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
             buildNameField(),
             // ignore: todo
             // TODO 14: Add Importance selection
+            buildImportanceField(),
             // ignore: todo
             // TODO 15: Add date picker
+            buildDateField(context),
             // ignore: todo
             // TODO 16: Add time picker
+            buildTimeField(context),
             // ignore: todo
             // TODO 17: Add color picker
+            const SizedBox(height: 10.0),
+            buildColorPicker(context),
             // ignore: todo
             // TODO 18: Add slider
             // ignore: todo
@@ -168,17 +173,197 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
 
   // ignore: todo
   // TODO: Add buildImportanceField()
-  
+  Widget buildImportanceField() {
+    // 1
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // 2
+        Text(
+          'Importance',
+          style: GoogleFonts.lato(fontSize: 28.0),
+        ),
+        // 3
+        Wrap(
+          spacing: 10.0,
+          children: [
+            // 4
+            ChoiceChip(
+              // 5
+              selectedColor: Colors.black,
+              // 6
+              selected: (_importance == Importance.low),
+              // 7
+              label: const Text(
+                'low',
+                style: TextStyle(color: Colors.white),
+              ),
+              onSelected: (selected) {
+                setState(() => _importance = Importance.low);
+              },
+            ),
+            ChoiceChip(
+              selectedColor: Colors.black,
+              selected: _importance == Importance.medium,
+              label: const Text(
+                'medium',
+                style: TextStyle(color: Colors.white),
+              ),
+              onSelected: (selected) {
+                setState(() => _importance = Importance.medium);
+              },
+            ),
+            ChoiceChip(
+              selectedColor: Colors.black,
+              selected: _importance == Importance.high,
+              label: const Text(
+                'high',
+                style: TextStyle(color: Colors.white),
+              ),
+              onSelected: (selected) {
+                setState(() => _importance = Importance.high);
+              },
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
   // ignore: todo
   // TODO: ADD buildDateField()
+  Widget buildDateField(BuildContext context) {
+    // 1
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // 2
+        Row(
+          // 3
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // 4
+            Text('Date', style: GoogleFonts.lato(fontSize: 28.0)),
+            // 5
+            TextButton(
+              child: const Text('Select'),
+              // 6
+              onPressed: () async {
+                final currentDate = DateTime.now();
+                // 7
+                final selectedDate = await showDatePicker(
+                    context: context,
+                    initialDate: currentDate,
+                    firstDate: currentDate,
+                    lastDate: DateTime(currentDate.year + 5));
+                // 8
+                setState(() {
+                  if (selectedDate != null) {
+                    _dueDate = selectedDate;
+                  }
+                });
+              },
+            ),
+          ],
+        ),
+        // 9
+        Text('${DateFormat('yyyy-MM-dd').format(_dueDate)}'),
+      ],
+    );
+  }
 
   // ignore: todo
   // TODO: Add buildTimeField()
 
+  Widget buildTimeField(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Time of Day', style: GoogleFonts.lato(fontSize: 28)),
+            TextButton(
+              child: const Text('Select'),
+              onPressed: () async {
+                // 1
+                final timeOfDay = await showTimePicker(
+                  // 2
+                  initialTime: TimeOfDay.now(),
+                  context: context,
+                );
+                setState(() {
+                  if (timeOfDay != null) {
+                    _timeOfDay = timeOfDay;
+                  }
+                });
+              },
+              // 3
+            ),
+          ],
+        ),
+        Text('${_timeOfDay.format(context)}'),
+      ],
+    );
+  }
+
   // ignore: todo
   // TODO: Add buildColorPicker()
+  Widget buildColorPicker(BuildContext context) {
+    // 1
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        // 2
+        Row(
+          children: [
+            Container(
+              height: 50.0,
+              width: 10.0,
+              color: _currentColor,
+            ),
+            const SizedBox(width: 8.0),
+            Text('Color', style: GoogleFonts.lato(fontSize: 28))
+          ],
+        ),
+        // 3
+        TextButton(
+          child: const Text('Select'),
+          onPressed: () {
+            // 4
+            showDialog(
+              context: context,
+              builder: (context) {
+                // 5
+                return AlertDialog(
+                  content: BlockPicker(
+                    pickerColor: Colors.white,
+                    // 6
+                    onColorChanged: (color) {
+                      setState(() => _currentColor = color);
+                    },
+                  ),
+                  actions: [
+                    // 7
+                    TextButton(
+                      child: const Text('Save'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  ],
+                );
+              },
+            );
+          },
+        )
+      ],
+    );
+  }
 
   // ignore: todo
   // TODO: Add buildQuantityField()
+  Widget buildQuantityField(BuildContext context) {
+    return Container();
+  }
 }
