@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'empty_grocery_screen.dart';
+import 'grocery_item_screen.dart';
 
 import 'package:provider/provider.dart';
 import '../models/models.dart';
@@ -20,6 +21,29 @@ class GroceryScreen extends StatelessWidget {
         onPressed: () {
           // ignore: todo
           // TODO 11: Present GroceryItemScreen
+          // 1
+          final manager = Provider.of<GroceryManager>(context, listen: false);
+          // 2
+          Navigator.push(
+            context,
+            // 3
+            MaterialPageRoute(
+              // 4
+              builder: (context) {
+                return GroceryItemScreen(
+                  // 5
+                  onCreate: (item) {
+                    // 6
+                    manager.addItem(item);
+                    // 7
+                    Navigator.pop(context);
+                  },
+                  // 8
+                  onUpdate: (item) {},
+                );
+              },
+            ),
+          );
         },
       ),
       // 7
