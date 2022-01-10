@@ -7,7 +7,7 @@ class GroceryTile extends StatelessWidget {
   // 1
   final GroceryItem item;
   // 2
-  final Function(bool)? onComplete;
+  final Function(bool?)? onComplete;
   // 3
   final TextDecoration textDecoration;
   // 4
@@ -71,4 +71,12 @@ class GroceryTile extends StatelessWidget {
 
   // ignore: todo
   // TODO: Add buildCheckbox()
+  Widget buildCheckbox() {
+    return Checkbox(
+      // 1
+      value: item.isComplete,
+      // 2
+      onChanged: onComplete,
+    );
+  }
 }
