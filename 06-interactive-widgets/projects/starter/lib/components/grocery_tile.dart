@@ -63,6 +63,11 @@ class GroceryTile extends StatelessWidget {
 
   // ignore: todo
   // TODO: Add buildDate()
+  Widget buildDate() {
+    final dateFormatter = DateFormat('MMMM dd h:mm a');
+    final dateString = dateFormatter.format(item.date);
+    return Text(dateString, style: TextStyle(decoration: textDecoration));
+  }
 
   // ignore: todo
   // TODO: Add buildCheckbox()
