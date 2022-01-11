@@ -14,6 +14,42 @@ class GroceryListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: todo
     // TODO 26: Replace with ListView
-    return Container();
+    // return Container();
+    // 1
+    final groceryItems = manager.groceryItems;
+
+    // 2
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      // 3
+
+      child: ListView.separated(
+        // 4
+        itemCount: groceryItems.length,
+        itemBuilder: (context, index) {
+          final item = groceryItems[index];
+          // ignore: todo
+          // TODO 28: Wrap in a Dismissable
+          // ignore: todo
+          // TODO 27: Wrap in an InkWell
+          // 5
+          return GroceryTile(
+            key: Key(item.id),
+            item: item,
+            // 6
+            onComplete: (change) {
+              // 7
+              if (change != null) {
+                manager.completeItem(index, change);
+              }
+            },
+          );
+        },
+        // 8
+        separatorBuilder: (context, index) {
+          return const SizedBox(height: 16.0);
+        },
+      ),
+    );
   }
 }
