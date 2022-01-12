@@ -33,15 +33,23 @@ class GroceryListScreen extends StatelessWidget {
           // ignore: todo
           // TODO 27: Wrap in an InkWell
           // 5
-          return GroceryTile(
-            key: Key(item.id),
-            item: item,
-            // 6
-            onComplete: (change) {
-              // 7
-              if (change != null) {
-                manager.completeItem(index, change);
-              }
+
+          // 1
+          return InkWell(
+            child: GroceryTile(
+              key: Key(item.id),
+              item: item,
+              // 6
+              onComplete: (change) {
+                // 7
+                if (change != null) {
+                  manager.completeItem(index, change);
+                }
+              },
+            ),
+            // 2
+            onTap: (){
+             
             },
           );
         },
