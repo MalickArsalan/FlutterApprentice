@@ -26,10 +26,20 @@ class AppRoute extends RouterDelegate
   }) : navigatorKey = GlobalKey<NavigatorState>() {
     // ignore: todo
     // TODO: Add Listeners
+    appStateManager.addListener(notifyListeners);
+    groceryManager.addListener(notifyListeners);
+    profileManager.addListener(notifyListeners);
   }
 
   // ignore: todo
   // TODO: Dispose listeners
+  @override
+  void dispose() {
+    appStateManager.removeListener(notifyListeners);
+    groceryManager.removeListener(notifyListeners);
+    profileManager.removeListener(notifyListeners);
+    super.dispose();
+  }
 
   // 6
   @override
