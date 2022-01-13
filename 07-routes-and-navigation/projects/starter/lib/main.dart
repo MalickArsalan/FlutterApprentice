@@ -25,6 +25,7 @@ class _FooderlichState extends State<Fooderlich> {
   final _profileManager = ProfileManager();
   // ignore: todo
   // TODO: Create AppStateManager
+  final _appStateManager = AppStateManager();
   // ignore: todo
   // TODO: Define AppRouter
 
@@ -43,6 +44,9 @@ class _FooderlichState extends State<Fooderlich> {
         ),
         // ignore: todo
         // TODO: Add AppStateManager ChangeNotifierProvider
+        ChangeNotifierProvider(
+          create: (context) => _appStateManager,
+        ),
       ],
       child: Consumer<ProfileManager>(
         builder: (context, profileManager, child) {
