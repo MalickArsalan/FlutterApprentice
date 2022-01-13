@@ -4,7 +4,7 @@ import '../models/models.dart';
 import '../screens/screens.dart';
 
 // 1
-class AppRoute extends RouterDelegate
+class AppRouter extends RouterDelegate
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
   // 2
   @override
@@ -19,7 +19,7 @@ class AppRoute extends RouterDelegate
   // 5
   final ProfileManager profileManager;
 
-  AppRoute({
+  AppRouter({
     required this.appStateManager,
     required this.groceryManager,
     required this.profileManager,
