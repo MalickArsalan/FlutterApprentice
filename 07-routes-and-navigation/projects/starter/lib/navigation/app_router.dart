@@ -40,6 +40,7 @@ class AppRoute extends RouterDelegate
       key: navigatorKey,
       // ignore: todo
       // TODO: Add onPopPage
+      onPopPage: _handlePopPage,
       // 9
       pages: [
         // ignore: todo
@@ -64,6 +65,30 @@ class AppRoute extends RouterDelegate
 
   // ignore: todo
   // TODO: Add _handlePopPage
+
+  bool _handlePopPage(
+    // 1
+    Route<dynamic> route,
+    // 2
+    result,
+  ) {
+    // 3
+    if (!route.didPop(result)) {
+      // 4
+      return false;
+    }
+    // 5
+    // ignore: todo
+    // TODO: Handle Onboarding and splash
+    // ignore: todo
+    // TODO: Handle state when user closes grocery item screen
+    // ignore: todo
+    // TODO: Handle state when user closes profile screen
+    // ignore: todo
+    // TODO: Handle state when user closes WebView screen
+    // 6
+    return true;
+  }
 
   // 10
   @override
