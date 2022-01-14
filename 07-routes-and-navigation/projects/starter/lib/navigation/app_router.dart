@@ -62,6 +62,8 @@ class AppRouter extends RouterDelegate
           LoginScreen.page(),
         // ignore: todo
         // TODO: Add OnboardingScreen
+        if (appStateManager.isLoggedIn && !appStateManager.isOnboardingComplete)
+          OnboardingScreen.page(),
         // ignore: todo
         // TODO: Add Home
         // ignore: todo
@@ -93,6 +95,9 @@ class AppRouter extends RouterDelegate
     // 5
     // ignore: todo
     // TODO: Handle Onboarding and splash
+    if (route.settings.name == FooderlichPages.onboardingPath) {
+      appStateManager.logout();
+    }
     // ignore: todo
     // TODO: Handle state when user closes grocery item screen
     // ignore: todo
