@@ -55,6 +55,7 @@ class AppRouter extends RouterDelegate
       pages: [
         // ignore: todo
         // TODO: Add SplashScreen
+        if (!appStateManager.isInitialized) SplashScreen.page(),
         // ignore: todo
         // TODO: Add LoginScreen
         // ignore: todo

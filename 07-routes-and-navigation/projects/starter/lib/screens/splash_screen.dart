@@ -26,6 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.didChangeDependencies();
     // ignore: todo
     // TODO: Initialize App
+    Provider.of<AppStateManager>(context, listen: false).initializeApp();
   }
 
   @override
