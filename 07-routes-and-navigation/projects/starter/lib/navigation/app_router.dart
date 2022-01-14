@@ -58,6 +58,8 @@ class AppRouter extends RouterDelegate
         if (!appStateManager.isInitialized) SplashScreen.page(),
         // ignore: todo
         // TODO: Add LoginScreen
+        if (appStateManager.isInitialized && !appStateManager.isLoggedIn)
+          LoginScreen.page(),
         // ignore: todo
         // TODO: Add OnboardingScreen
         // ignore: todo

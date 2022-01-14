@@ -38,7 +38,7 @@ class AppStateManager extends ChangeNotifier {
 
   // ignore: todo
   // TODO: Add login
-  void login() {
+  void login(String username, String password) {
     // 10
     _loggedIn = true;
     // 11
