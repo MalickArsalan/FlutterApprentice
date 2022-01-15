@@ -14,7 +14,7 @@ class Home extends StatefulWidget {
   static MaterialPage page(int currentTab) {
     return MaterialPage(
       name: FooderlichPages.home,
-      key : ValueKey(FooderlichPages.home),
+      key: ValueKey(FooderlichPages.home),
       child: Home(currentTab: currentTab),
     );
   }
@@ -41,41 +41,49 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     // ignore: todo
     // TODO: Wrap Consumer for AppStateManager
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Fooderlich',
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        actions: [
-          profileButton(),
-        ],
-      ),
-      body: IndexedStack(index: widget.currentTab, children: pages),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Theme.of(context).textSelectionTheme.selectionColor,
-        currentIndex: widget.currentTab,
-        onTap: (index) {
-          // ignore: todo
-          // TODO: Update user's selected tab
-        },
-        items: <BottomNavigationBarItem>[
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
-            label: 'Explore',
+    return Consumer<AppStateManager>(
+      builder: (contxet, appStateManager, child) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              'Fooderlich',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            actions: [
+              profileButton(),
+            ],
           ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'Recipes',
+          body: IndexedStack(index: widget.currentTab, children: pages),
+          bottomNavigationBar: BottomNavigationBar(
+            selectedItemColor:
+                Theme.of(context).textSelectionTheme.selectionColor,
+            currentIndex: widget.currentTab,
+            onTap: (index) {
+              // ignore: todo
+              // TODO: Update user's selected tab
+              Provider.of<AppStateManager>(context, listen: false)
+                  .goToTab(index);
+            },
+            items: <BottomNavigationBarItem>[
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.explore),
+                label: 'Explore',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.book),
+                label: 'Recipes',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.list),
+                label: 'To Buy',
+              ),
+            ],
           ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'To Buy',
-          ),
-        ],
-      ),
+        );
+        // ignore: todo
+        // TODO: Add closing },);
+      },
     );
-    // TODO: Add closing },);
   }
 
   Widget profileButton() {
@@ -89,6 +97,7 @@ class _HomeState extends State<Home> {
           ),
         ),
         onTap: () {
+          // ignore: todo
           // TODO: home -> profile
         },
       ),
