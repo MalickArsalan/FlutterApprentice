@@ -66,6 +66,8 @@ class AppRouter extends RouterDelegate
           OnboardingScreen.page(),
         // ignore: todo
         // TODO: Add Home
+        if (appStateManager.isOnboardingComplete)
+          Home.page(appStateManager.getSelectedTab),
         // ignore: todo
         // TODO: Create new item
         // ignore: todo
