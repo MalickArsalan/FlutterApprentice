@@ -70,8 +70,33 @@ class AppRouter extends RouterDelegate
           Home.page(appStateManager.getSelectedTab),
         // ignore: todo
         // TODO: Create new item
+        // 1
+        if (groceryManager.isCreatingNewItem)
+          // 2
+          GroceryItemScreen.page(
+            onCreate: (item) {
+              // 3
+              groceryManager.addItem(item);
+            },
+            onUpdate: (item, index) {
+              // 4 No update
+            },
+          ),
+
         // ignore: todo
         // TODO: Select GroceryItemScreen
+        // 1
+        if (groceryManager.selectedIndex != -1)
+          // 2
+          GroceryItemScreen.page(
+              item: groceryManager.selectedGroceryItem,
+              index: groceryManager.selectedIndex,
+              onUpdate: (item, index) {
+                groceryManager.updateItem(item, index);
+              },
+              onCreate: (_) {
+                // 4 No create
+              })
         // ignore: todo
         // TODO: Add Profile Screen
         // ignore: todo
@@ -102,6 +127,9 @@ class AppRouter extends RouterDelegate
     }
     // ignore: todo
     // TODO: Handle state when user closes grocery item screen
+    if (route.settings.name == FooderlichPages.groceryItemDetails) {
+      groceryManager.groceryItemTapped(-1);
+    }
     // ignore: todo
     // TODO: Handle state when user closes profile screen
     // ignore: todo
