@@ -79,6 +79,7 @@ class _FooderlichState extends State<Fooderlich> {
               routerDelegate: _appRouter,
               // ignore: todo
               // TODO: Add backButtonDispatcher
+              backButtonDispatcher: RootBackButtonDispatcher(),
             ),
           );
         },
