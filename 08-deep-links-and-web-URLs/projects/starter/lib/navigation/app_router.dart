@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../models/models.dart';
 import '../screens/screens.dart';
+import 'app_link.dart';
 
-class AppRouter extends RouterDelegate //TODO: Add <AppLink>
+// ignore: todo
+class AppRouter extends RouterDelegate<AppLink> //TODO: Add <AppLink>
     with
         ChangeNotifier,
         PopNavigatorRouterDelegateMixin {
@@ -98,7 +100,45 @@ class AppRouter extends RouterDelegate //TODO: Add <AppLink>
 
   // TODO: Apply configuration helper
 
+  // ignore: todo
   // TODO: Replace setNewRoutePath
+
+  // @override
+  // Future<void> setNewRoutePath(configuration) async => null;
+
   @override
-  Future<void> setNewRoutePath(configuration) async => null;
+  Future<void> setNewRoutePath(AppLink newLink) async {
+    // 2
+    switch (newLink.location) {
+      // 3
+      case AppLink.profilePath:
+        profileManager.tapOnProfile(true);
+        break;
+      // 4
+      case AppLink.itemPath:
+        // 5
+        final itemId = newLink.itemId;
+        if (itemId != null) {
+          groceryManager.setSelectedGroceryItem(itemId);
+        } else {
+          // 6
+          groceryManager.createNewItem();
+        }
+        // 7
+        profileManager.tapOnProfile(false);
+        break;
+
+      // 8
+      case AppLink.homePath:
+        // 9
+        appStateManager.goToTab(newLink.currentTab ?? 0);
+        // 10
+        profileManager.tapOnProfile(false);
+        groceryManager.groceryItemTapped(-1);
+        break;
+      // 11
+      default:
+        break;
+    }
+  }
 }

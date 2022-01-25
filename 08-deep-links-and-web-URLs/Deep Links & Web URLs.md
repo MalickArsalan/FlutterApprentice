@@ -111,3 +111,15 @@ When the user taps a button or the app state changes, you need to change the cur
 * The query parameters.
 
 In the next section, AppLink is the data type that encapsulates the URL string.
+
+### Connecting the parser to the app router
+
+After setting up your `RouteInformationParser`, it’s time to connect it to your router delegate.
+
+![Navigator 2.0](./assets/Navigator%202.0%20(3).png)
+
+### Converting a URL to an app state (Continue)
+
+When the user enters a new URL on the web or triggers a deep link on mobile, `RouteInformationProvider` notifies `RouteInformationParser` that there’s a new route, as shown below:
+
+![Navigator 2.0](./assets/RouteInfomationParser.png)
