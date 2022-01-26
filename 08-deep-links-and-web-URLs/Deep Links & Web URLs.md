@@ -122,4 +122,14 @@ After setting up your `RouteInformationParser`, it’s time to connect it to you
 
 When the user enters a new URL on the web or triggers a deep link on mobile, `RouteInformationProvider` notifies `RouteInformationParser` that there’s a new route, as shown below:
 
-![Navigator 2.0](./assets/RouteInfomationParser.png)
+![RouteInfomationParser(](./assets/RouteInfomationParser(1).png)
+
+### Converting the app state to a URL
+
+At this point, you’ve converted a URL to an app state. Next, you need to do the opposite. When the user taps a button or navigates to another screen, you need to convert the app state back to a URL string. For the web app, this will synchronize the browser’s address bar.
+
+![RouteInfomationParser](./assets/RouteInfomationParser(2).png)
+
+1. When the user presses a button or modifies a state, `notifyListeners()` fires.
+2. `RouteInformationParser` asks for the current navigation configuration, so you must convert your app state to an `AppLink`.
+3. `RouteInformationParser` then calls `restoreRouteInformation` and converts `AppLink` to a URL string.
